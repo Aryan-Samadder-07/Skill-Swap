@@ -1,0 +1,121 @@
+/* Base layout */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9fdfc;
+  color: #333;
+}
+
+.upload-header {
+  background-color: #1b4332;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.upload-header h1 {
+  margin: 0;
+  font-size: 1.4em;
+}
+
+.back-btn {
+  background: #40916c;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background: #2d6a4f;
+}
+
+main {
+  padding: 30px 20px;
+}
+
+/* Upload Form */
+#uploadForm {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#uploadForm label {
+  font-weight: 500;
+  color: #2d6a4f;
+}
+
+#uploadForm input,
+#uploadForm textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 0.95em;
+}
+
+#uploadForm button {
+  background-color: #40916c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+#uploadForm button:hover {
+  background-color: #2d6a4f;
+}
+
+/* Progress Bar */
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+progress {
+  width: 100%;
+  height: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #40916c;
+  border-radius: 5px;
+}
+
+#progressText {
+  font-weight: 600;
+  color: #2d6a4f;
+}
+
+#cancelUploadBtn {
+  background-color: #d00000;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#cancelUploadBtn:hover {
+  background-color: #9d0208;
+}

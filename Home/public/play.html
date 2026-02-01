@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Watch Video</title>
+  <link rel="stylesheet" href="styles/play.css">
+</head>
+<body>
+  <!-- Toast container -->
+  <div id="toastContainer"></div>
+
+  <header>
+    <h1>SkillSwap Player</h1>
+    <nav>
+      <a href="feed.html">Home</a>
+      <button id="logoutBtn">Logout</button>
+    </nav>
+  </header>
+
+  <main>
+    <div id="videoContainer">
+      <video id="videoPlayer" controls poster="illustrations/default-thumbnail.png">
+        <source id="videoSource" src="" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div id="videoDetails">
+      <h2 id="videoTitle"></h2>
+      <p id="videoDescription"></p>
+      <p><strong>Creator:</strong> <span id="videoCreator"></span></p>
+      <p><strong>Credits Spent:</strong> <span id="videoCost"></span></p>
+    </div>
+  </main>
+
+  <script type="module" src="../src/play.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - Skill Swap</title>
+    <link rel="stylesheet" href="../src/css/auth.css" />
+  </head>
+  <body>
+    <!-- Toast container -->
+    <div id="toastContainer"></div>
+
+    <div class="auth-container">
+      <h2>Create Your Account</h2>
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="name">Full Name:</label>
+          <input type="text" name="name" id="name" required />
+          <span class="error-message" id="nameError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" required />
+          <span class="error-message" id="usernameError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email" required />
+          <span class="error-message" id="emailError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" required />
+          <span class="error-message" id="passwordError"></span>
+        </div>
+
+        <!-- Step 1: Send OTP -->
+        <button type="button" id="sendOtpBtn">Send OTP</button>
+
+        <!-- Step 2: Enter OTP (hidden until Send OTP is clicked) -->
+        <div id="otpSection" style="display: none; margin-top: 15px">
+          <div class="form-group">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" name="otp" id="otp" required />
+            <span class="error-message" id="otpError"></span>
+          </div>
+          <button type="submit">Complete Signup</button>
+        </div>
+      </form>
+
+      <p>Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+
+    <script type="module" src="../src/js/signup.js"></script>
+  </body>
+</html>

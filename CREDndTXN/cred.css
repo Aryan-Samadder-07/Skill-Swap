@@ -1,0 +1,143 @@
+/* Base layout */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f9fdfc;
+  color: #333;
+}
+
+main {
+  padding: 40px 20px;
+}
+
+/* Balance + Transactions sections */
+.balance,
+.transactions {
+  background-color: #ffffff;
+  padding: 30px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.balance h2,
+.transactions h2 {
+  color: #1b4332;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  background-color: #40916c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #2d6a4f;
+}
+
+/* Transactions Table */
+.transactions table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.transactions th,
+.transactions td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.transactions th {
+  background-color: #e6f4ea;
+  color: #2d6a4f;
+}
+
+/* ✅ Striped rows */
+.transactions tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* ✅ Row hover highlight */
+.transactions tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Summary Bar */
+.summary-bar {
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #2d6a4f;
+}
+
+/* Filter Controls */
+.filter-controls {
+  margin-bottom: 15px;
+}
+
+.filter-controls button {
+  padding: 8px 16px;
+  margin-right: 10px;
+  background-color: #40916c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filter-controls button:hover {
+  background-color: #2d6a4f;
+}
+
+/* Pagination Controls */
+.pagination {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  margin: 0 10px;
+  background-color: #40916c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #2d6a4f;
+}
+
+#pageInfo {
+  font-weight: 600;
+  color: #2d6a4f;
+}
+
+/* Export Controls */
+.export-controls {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.export-controls button {
+  padding: 8px 16px;
+  margin: 0 10px;
+  background-color: #1b4332;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.export-controls button:hover {
+  background-color: #2d6a4f;
+}

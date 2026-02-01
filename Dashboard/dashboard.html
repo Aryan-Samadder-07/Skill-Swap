@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Profile - SkillSwap</title>
+    <link rel="stylesheet" href="dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="dashboard-header">
+      <h1>Your Profile</h1>
+      <button
+        onclick="window.location.href = '../Home/public/feed.html'"
+        class="back-btn"
+      >
+        Home
+      </button>
+    </header>
+
+    <main>
+      <!-- Personal Details -->
+      <section class="profile">
+        <h2>Your Profile</h2>
+        <img
+          id="userAvatar"
+          alt="Profile Picture"
+          width="80"
+          height="80"
+          style="border-radius: 50%"
+        />
+        <p><strong>Name:</strong> <span id="userName"></span></p>
+        <p><strong>Email:</strong> <span id="userEmail"></span></p>
+        <p><strong>Username:</strong> <span id="userUsername"></span></p>
+        <p><strong>Credits:</strong> <span id="userCredits"></span></p>
+        <p><strong>Bio:</strong> <span id="userBio"></span></p>
+        <p><strong>Phone:</strong> <span id="userPhone"></span></p>
+        <button id="editProfileBtn" type="button">Edit Profile</button>
+
+        <!-- Profile modal toast container -->
+        <div
+          id="toastContainerProfile"
+          class="toast-container inside-modal"
+        ></div>
+      </section>
+
+      <!-- Skills Section -->
+      <section class="skills">
+        <h2>Your Skills</h2>
+        <p>Coming soon: list of skills you teach or learn.</p>
+      </section>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div id="profileModal" class="modal hidden" aria-hidden="true">
+      <div class="modal-content">
+        <span class="close" role="button" aria-label="Close">&times;</span>
+        <h2>Edit Profile</h2>
+        <form id="profileForm">
+          <label for="profileAvatarFile">Profile Picture:</label>
+          <input type="file" id="profileAvatarFile" accept="image/*" />
+          <img
+            id="avatarPreview"
+            alt="Avatar Preview"
+            width="80"
+            height="80"
+            style="border-radius: 50%; margin-top: 10px; display: none"
+          />
+
+          <label for="profileName">Name:</label>
+          <input type="text" id="profileName" readonly />
+
+          <label for="profileEmail">Email:</label>
+          <input type="text" id="profileEmail" readonly />
+
+          <label for="profileUsername">Username:</label>
+          <input type="text" id="profileUsername" required />
+
+          <label for="profileBio">Bio:</label>
+          <textarea id="profileBio"></textarea>
+
+          <label for="profilePhone">Phone:</label>
+          <input type="text" id="profilePhone" />
+
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="dashboard.js"></script>
+  </body>
+</html>

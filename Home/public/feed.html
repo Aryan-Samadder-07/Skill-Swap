@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SkillSwap Home</title>
+    <link rel="stylesheet" href="../src/css/feed.css" />
+  </head>
+  <body>
+    <!-- Toast container -->
+    <div id="toastContainer"></div>
+
+    <!-- Fixed Header -->
+    <header class="home-header">
+      <h1>SkillSwap</h1>
+      <nav>
+        <div class="dropdown">
+          <button class="dropbtn">Menu ▾</button>
+          <div class="dropdown-content">
+            <a href="upload.html">Upload</a>
+            <a href="../../Dashboard/dashboard.html">Dashboard</a>
+            <a href="../../CREDndTXN/cred.html">Credits</a>
+            <a href="#" id="logoutBtn">Logout</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Feed Section -->
+    <main>
+      <section id="feed">
+        <h2>Available Videos</h2>
+        <div id="videoList"></div>
+      </section>
+    </main>
+
+    <script type="module" src="../src/js/feed.js"></script>
+  </body>
+</html>

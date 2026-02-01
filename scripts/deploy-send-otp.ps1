@@ -1,0 +1,1 @@
+supabase functions deploy send-otp --no-verify-jwt

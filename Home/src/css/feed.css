@@ -1,0 +1,141 @@
+/* Base layout */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f9fdfc;
+  color: #333;
+}
+
+/* Fixed Header */
+.home-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #2d6a4f;
+  color: white;
+  padding: 10px 20px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between; /* keeps title left, nav right */
+  align-items: center;
+}
+
+.home-header h1 {
+  margin: 0;
+  font-size: 1.4em;
+}
+
+/* Push nav all the way to the right */
+.home-header nav {
+  display: flex;
+  gap: 15px;
+  margin-left: auto; /* ✅ forces nav to the far right */
+  padding-right: 1em; /* ✅ adds breathing room from edge */
+}
+
+.home-header button {
+  background: #40916c;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.95em;
+}
+
+.home-header button:hover {
+  background: #2d6a4f;
+}
+
+/* App Header (other pages) */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: #2196f3;
+  color: #fff;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px; /* ✅ keeps button away from screen edge */
+}
+
+.dropbtn {
+  background-color: #1976d2;
+  color: white;
+  padding: 10px 16px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.dropbtn:hover {
+  background-color: #1565c0;
+}
+
+/* Dropdown menu aligned under button */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: 0; /* ✅ anchors menu to button’s left edge */
+  background-color: #1b4332;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: whitesmoke;
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #153024;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Main content */
+main {
+  margin-top: 70px; /* push content below fixed header */
+  padding: 20px;
+}
+
+/* Feed Section */
+#feed h2 {
+  color: #1b4332;
+  margin-bottom: 15px;
+}
+
+#videoList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.video-card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+.video-card h3 {
+  margin-top: 0;
+  color: #2d6a4f;
+}
+
+.video-card p {
+  font-size: 0.9em;
+  color: #555;
+}
