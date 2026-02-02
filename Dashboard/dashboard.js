@@ -29,16 +29,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // ✅ Modal logic
+  // ✅ Modal logic using classList toggle
   editBtn.addEventListener("click", () => {
-    modal.style.display = "block";
+    modal.classList.remove("hidden"); // show modal
     modal.removeAttribute("aria-hidden");
     modal.removeAttribute("inert");
     document.getElementById("profileName").focus();
   });
 
   closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";
+    modal.classList.add("hidden"); // hide modal
     modal.setAttribute("aria-hidden", "true");
     modal.setAttribute("inert", "");
     editBtn.focus();
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   window.addEventListener("click", (e) => {
     if (e.target === modal) {
-      modal.style.display = "none";
+      modal.classList.add("hidden"); // hide modal
       modal.setAttribute("aria-hidden", "true");
       modal.setAttribute("inert", "");
       editBtn.focus();
@@ -54,8 +54,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.style.display === "block") {
-      modal.style.display = "none";
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+      modal.classList.add("hidden"); // hide modal
       modal.setAttribute("aria-hidden", "true");
       modal.setAttribute("inert", "");
       editBtn.focus();
@@ -137,6 +137,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     .getElementById("profileForm")
     .addEventListener("submit", async (e) => {
       e.preventDefault();
+      console.log("Save button clicked"); // Debug
 
       const name = document.getElementById("profileName").value;
       const username = document.getElementById("profileUsername").value;
@@ -152,7 +153,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
-        const filePath = `avatars/${user.id}/${Date.now()}-${file.name}`;
+        // ✅ FIXED: remove extra "avatars/" prefix
+        const filePath = `${user.id}/${Date.now()}-${file.name}`;
 
         const { error: uploadError } = await supabase.storage
           .from("avatars")
@@ -207,7 +209,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             updated.avatar_url || DEFAULT_AVATAR;
         }
 
-        modal.style.display = "none";
+        // ✅ Hide modal consistently
+        modal.classList.add("hidden");
         modal.setAttribute("aria-hidden", "true");
         modal.setAttribute("inert", "");
         editBtn.focus();

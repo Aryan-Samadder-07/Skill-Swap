@@ -83,11 +83,13 @@
           <label for="profilePhone">Phone:</label>
           <input type="text" id="profilePhone" />
 
-          <button type="submit">Save Changes</button>
+          <!-- ✅ Added ID to Save button for clarity -->
+          <button type="submit" id="saveProfileBtn">Save Changes</button>
         </form>
       </div>
     </div>
 
-    <script type="module" src="dashboard.js"></script>
+    <!-- ✅ Ensure script loads after DOM -->
+    <script type="module" src="dashboard.js" defer></script>
   </body>
 </html>
