@@ -115,7 +115,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("profileBio").value = profile.bio || "";
     document.getElementById("profilePhone").value = profile.phone || "";
 
-    // ⚠️ Ensure loadTransactions is defined before calling
     if (typeof loadTransactions === "function") {
       loadTransactions(user.id);
     }
@@ -159,15 +158,16 @@ document.addEventListener("DOMContentLoaded", async () => {
           .from("avatars")
           .upload(filePath, file, { upsert: true });
 
-        if (!uploadError) {
-          const { data: publicUrlData } = supabase.storage
-            .from("avatars")
-            .getPublicUrl(filePath);
-          avatar_url = publicUrlData.publicUrl;
-        } else {
+        if (uploadError) {
           console.error("Avatar upload error:", uploadError.message);
           showError(`Failed to upload avatar: ${uploadError.message}`);
+          return; // stop execution if upload fails
         }
+
+        const { data } = supabase.storage
+          .from("avatars")
+          .getPublicUrl(filePath);
+        avatar_url = data.publicUrl;
       }
 
       const { error } = await supabase.from("profiles").upsert({
