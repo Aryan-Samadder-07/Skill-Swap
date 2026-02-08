@@ -1,6 +1,6 @@
 import { login, logout, supabase } from "../utils/api.js";
 import { safeAddListener } from "../utils/dom.js";
-import { showError, showSuccess, showInfo } from "../utils/feedback.js"; // adjust path
+import { showError, showSuccess, showInfo } from "../utils/feedback.js"; // old path
 
 const USE_LOCAL = false;
 const BASE_URL = USE_LOCAL
@@ -43,12 +43,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(`${BASE_URL}/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email }),
       });
 
       const result = await response.json();
 
-      if (!response.ok) throw new Error(result?.error || `Server error: ${response.status}`);
+      if (!response.ok)
+        throw new Error(result?.error || `Server error: ${response.status}`);
 
       if (result.success) {
         showSuccess("OTP sent to your email. Check your inbox.");
@@ -82,12 +83,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(`${BASE_URL}/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, otp, password, name, username })
+        body: JSON.stringify({ email, otp, password, name, username }),
       });
 
       const result = await response.json();
 
-      if (!response.ok) throw new Error(result?.error || `Server error: ${response.status}`);
+      if (!response.ok)
+        throw new Error(result?.error || `Server error: ${response.status}`);
 
       if (result.success) {
         if (result.data?.user?.created_at) {
@@ -105,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-/*   // ✅ Logout
+  /*   // ✅ Logout
   safeAddListener("#logoutBtn", "click", async () => {
     const { error } = await logout();
     if (error) {
@@ -118,7 +120,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ✅ Session check
   (async () => {
-    const { data: { session } } = await supabase.auth.getSession();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
     if (session && window.location.pathname.includes("login.html")) {
       showInfo("Already logged in, redirecting to dashboard...");
       window.location.href = "../../Home/public/feed.html";

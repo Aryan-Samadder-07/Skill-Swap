@@ -1,14 +1,16 @@
 // feed.js
-import { supabase, logout } from "../../../Landing Page/src/utils/api.js";
-import { safeAddListener, safeAddListeners } from "../../../Landing Page/src/utils/dom.js";
-import { showError, showSuccess, showInfo } from "../../../Landing Page/src/utils/feedback.js";
+import { supabase, logout } from "../../../utils/api.js";
+import { safeAddListener, safeAddListeners } from "../../../utils/dom.js";
+import { showError, showSuccess, showInfo } from "../../../utils/feedback.js";
 
 // ✅ Centralized paths
 const LOGIN_PATH = "../../Landing Page/public/login.html";
 const PLAY_PATH = "../../public/play.html";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) {
     showError("You must be logged in to view the feed.");
     window.location.href = LOGIN_PATH;
@@ -82,7 +84,10 @@ async function loadFeed(user) {
       return;
     }
 
-    await supabase.rpc("add_credits", { user_id: creatorId, amount: costCredits });
+    await supabase.rpc("add_credits", {
+      user_id: creatorId,
+      amount: costCredits,
+    });
 
     await supabase.from("transactions").insert({
       video_id: videoId,

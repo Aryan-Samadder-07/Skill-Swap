@@ -1,9 +1,11 @@
-import { supabase, logout } from "../../../Landing Page/src/utils/api.js";
-import { safeAddListener } from "../../../Landing Page/src/utils/dom.js";
-import { showError, showSuccess, showInfo } from "../../../shared/feedback.js"; // adjust path
+import { supabase, logout } from "../../../utils/api.js";
+import { safeAddListener } from "../../../utils/dom.js";
+import { showError, showSuccess, showInfo } from "../../../utils/feedback.js"; // adjust path
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) {
     showError("You must be logged in to view videos.");
     window.location.href = "../../../Landing Page/public/login.html";
@@ -35,7 +37,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function loadVideo(videoId) {
   const { data: video, error } = await supabase
     .from("videos")
-    .select("title, description, video_url, cost_credits, creator_id, profiles(username)")
+    .select(
+      "title, description, video_url, cost_credits, creator_id, profiles(username)",
+    )
     .eq("id", videoId)
     .single();
 
@@ -60,6 +64,7 @@ async function loadVideo(videoId) {
   }
   if (titleEl) titleEl.textContent = video.title;
   if (descEl) descEl.textContent = video.description || "";
-  if (creatorEl) creatorEl.textContent = video.profiles?.username || video.creator_id;
+  if (creatorEl)
+    creatorEl.textContent = video.profiles?.username || video.creator_id;
   if (costEl) costEl.textContent = video.cost_credits;
 }

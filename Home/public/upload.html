@@ -1,46 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Upload Video - SkillSwap</title>
-  <link rel="stylesheet" href="../src/css/upload.css" />
-</head>
-<body>
-  <!-- Toast container -->
-  <div id="toastContainer"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Video - SkillSwap</title>
+    <link rel="stylesheet" href="../../utils/common.css" />
+  </head>
+  <body>
+    <!-- Toast container -->
+    <div id="toastContainer"></div>
 
-  <!-- Header -->
-  <header class="upload-header">
-    <button onclick="window.location.href='feed.html'" class="back-btn">Home</button>
-    <h1>Upload Video</h1>
-  </header>
+    <!-- Header -->
+    <header class="upload-header">
+      <button onclick="window.location.href = 'feed.html'" class="back-btn">
+        Home
+      </button>
+      <h1>Upload Video</h1>
+    </header>
 
-  <main>
-  <form id="uploadForm">
-    <label for="videoTitle">Title:</label>
-    <input type="text" id="videoTitle" required />
+    <main>
+      <form id="uploadForm">
+        <label for="videoTitle">Title:</label>
+        <input type="text" id="videoTitle" required />
 
-    <label for="videoDescription">Description:</label>
-    <textarea id="videoDescription"></textarea>
+        <label for="videoDescription">Description:</label>
+        <textarea id="videoDescription"></textarea>
 
-    <label for="videoFile">Video File:</label>
-    <input type="file" id="videoFile" accept="video/*" required />
+        <label for="videoFile">Video File:</label>
+        <input type="file" id="videoFile" accept="video/*" required />
 
-    <label for="videoCredits">Cost (credits):</label>
-    <input type="number" id="videoCredits" min="1" value="1" required />
+        <label for="videoCredits">Cost (credits):</label>
+        <input type="number" id="videoCredits" min="1" value="1" required />
 
-    <!-- Progress Bar -->
-<div class="progress-container">
-  <progress id="uploadProgress" value="0" max="100"></progress>
-  <span id="progressText">0%</span>
-  <button type="button" id="cancelUploadBtn">Cancel Upload</button>
-</div>
+        <!-- Progress Bar -->
+        <div class="progress-container">
+          <progress id="uploadProgress" value="0" max="100"></progress>
+          <span id="progressText">0%</span>
+          <button type="button" id="cancelUploadBtn">Cancel Upload</button>
+        </div>
 
-    <button type="submit">Upload</button>
-  </form>
-</main>
+        <button type="submit">Upload</button>
+      </form>
+    </main>
 
-  <script type="module" src="upload.js"></script>
-</body>
+    <script type="module" src="upload.js"></script>
+  </body>
 </html>

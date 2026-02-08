@@ -1,0 +1,207 @@
+/* ================================
+   Theme Variables
+   ================================ */
+:root {
+  --bg: #defdea; /* new global background (fresh mint tone) */
+  --authbg: #f0fdf4; /* auth pages */
+  --text: #333333;
+  --primary: #38a169; /* brighter green for header/buttons */
+  --secondary: #40916c; /* Productivity accents */
+  --accent: #ffd166; /* Energy highlights */
+  --lightbg: #e8fdf5; /* new highlight tone (slightly different mint) */
+  --footerbg: #d3f3dc; /* footer strip */
+  --error: #fa4336;
+  --success: #4caf50;
+  --info: #2196f3;
+}
+
+/* ================================
+   Global Base
+   ================================ */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+p {
+  margin-bottom: 0.75rem;
+}
+
+a {
+  color: var(--secondary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* ================================
+   Header & Navigation
+   ================================ */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem; /* 20px */
+  background-color: var(--primary); /* unified */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #fff;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+header nav li {
+  display: inline;
+}
+
+header nav a {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+header nav a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* ================================
+   Hero Section
+   ================================ */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3.75rem 1.25rem;
+  background-color: var(--bg); /* consistent */
+  margin-top: 4.5rem; /* offset for fixed header */
+}
+
+.hero-text h1 {
+  font-size: 3em;
+  color: var(--primary);
+}
+
+.hero-text p {
+  font-size: 1.2em;
+  margin: 1.25rem 0;
+}
+
+button,
+.btn {
+  padding: 0.625rem 1.25rem;
+  background-color: var(--secondary);
+  color: #fff;
+  border: none;
+  border-radius: 0.3125rem;
+  font-size: 1em;
+  cursor: pointer;
+}
+button:hover,
+.btn:hover {
+  background-color: var(--primary);
+}
+
+.hero-image img {
+  max-width: 25rem;
+  width: 100%;
+  height: auto;
+}
+
+/* ================================
+   Community Section
+   ================================ */
+.community {
+  padding: 2.5rem 1.25rem;
+  background-color: var(--lightbg); /* consistent */
+  text-align: center;
+}
+
+.community h2 {
+  font-size: 1.75em;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.community p {
+  font-size: 1.1em;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ================================
+   Footer
+   ================================ */
+footer {
+  text-align: center;
+  padding: 1.25rem;
+  background-color: var(--footerbg); /* consistent */
+  font-size: 0.9em;
+}
+
+/* ================================
+   Responsive Design
+   ================================ */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+  header nav ul {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 2.5rem 1rem;
+  }
+  .hero-image img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  button,
+  .btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+  }
+  .hero-text h1 {
+    font-size: 2em;
+  }
+  .hero-text p {
+    font-size: 1em;
+  }
+}

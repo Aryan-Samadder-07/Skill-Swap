@@ -1,9 +1,5 @@
-import { supabase } from "../Landing Page/src/utils/api.js";
-import {
-  showError,
-  showSuccess,
-  showInfo,
-} from "../Landing Page/src/utils/feedback.js";
+import { supabase } from "../utils/api.js";
+import { showError, showSuccess, showInfo } from "../utils/feedback.js";
 
 const DEFAULT_AVATAR =
   "https://ikixyxjmsmgdnmbtwnah.supabase.co/storage/v1/object/public/avatars/defaultpfp.jpg";

@@ -1,7 +1,7 @@
 // login.js
-import { login, supabase } from "../utils/api.js";
-import { safeAddListener } from "../utils/dom.js";
-import { showError, showSuccess, showInfo } from "../utils/feedback.js";
+import { login, supabase } from "../../../utils/api.js";
+import { safeAddListener } from "../../../utils/dom.js";
+import { showError, showSuccess, showInfo } from "../../../utils/feedback.js";
 
 // ✅ Centralized paths
 const FEED_PATH = "../../Home/public/feed.html";

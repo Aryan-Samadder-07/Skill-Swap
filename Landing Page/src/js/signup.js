@@ -1,7 +1,7 @@
 // signup.js
-import { supabase } from "../utils/api.js";
-import { safeAddListener } from "../utils/dom.js";
-import { showError, showSuccess, showInfo } from "../utils/feedback.js";
+import { supabase } from "../../../utils/api.js";
+import { safeAddListener } from "../../../utils/dom.js";
+import { showError, showSuccess, showInfo } from "../../../utils/feedback.js";
 
 const BASE_URL = "https://ikixyxjmsmgdnmbtwnah.functions.supabase.co";
 const LOGIN_PATH = "login.html";

@@ -1,5 +1,5 @@
-import { supabase } from "../../../Landing Page/src/utils/api.js";
-import { showError, showSuccess, showInfo } from "../../../shared/feedback.js"; // adjust path
+import { supabase } from "../../../utils/api.js";
+import { showError, showSuccess, showInfo } from "../../../utils/feedback.js"; // adjust path
 
 let xhr; // keep reference globally
 
@@ -16,7 +16,10 @@ document.getElementById("uploadForm").addEventListener("submit", async (e) => {
     return;
   }
 
-  const { data: { user }, error: userError } = await supabase.auth.getUser();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
   if (userError || !user) {
     showError("You must be logged in to upload.");
     return;
@@ -49,7 +52,7 @@ document.getElementById("uploadForm").addEventListener("submit", async (e) => {
           title,
           description,
           video_url,
-          cost_credits: credits
+          cost_credits: credits,
         })
         .select()
         .single();
@@ -63,7 +66,7 @@ document.getElementById("uploadForm").addEventListener("submit", async (e) => {
         video_id: video.id,
         viewer_id: user.id,
         creator_id: user.id,
-        credits_spent: 0
+        credits_spent: 0,
       });
 
       showSuccess("Video uploaded successfully!");
