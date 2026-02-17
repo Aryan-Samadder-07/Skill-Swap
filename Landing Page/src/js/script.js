@@ -1,11 +1,11 @@
 // Handle "Get Started" button navigation
 document.getElementById("getStarted")?.addEventListener("click", () => {
-  window.location.href = "signup.html";
+  window.location.href = "Landing Page/public/signup.html";
 });
 
 // Smooth scroll for navigation links
-document.querySelectorAll("nav a").forEach(link => {
-  link.addEventListener("click", e => {
+document.querySelectorAll("nav a").forEach((link) => {
+  link.addEventListener("click", (e) => {
     if (link.getAttribute("href").startsWith("#")) {
       e.preventDefault();
       const targetId = link.getAttribute("href").substring(1);
