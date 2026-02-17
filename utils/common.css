@@ -57,7 +57,7 @@ header {
   align-items: center;
   padding: 1.25rem; /* 20px */
   background-color: var(--primary); /* unified */
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   width: 100%;
   z-index: 50;
