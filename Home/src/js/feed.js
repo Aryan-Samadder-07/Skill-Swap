@@ -4,7 +4,7 @@ import { safeAddListener, safeAddListeners } from "../../../utils/dom.js";
 import { showError, showSuccess, showInfo } from "../../../utils/feedback.js";
 
 // ✅ Centralized paths
-const LOGIN_PATH = "../../Landing Page/public/login.html";
+const LANDING_PATH = "../../index.html";
 const PLAY_PATH = "../../public/play.html";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   } = await supabase.auth.getUser();
   if (!user) {
     showError("You must be logged in to view the feed.");
-    window.location.href = LOGIN_PATH;
+    window.location.href = LANDING_PATH;
     return;
   }
 
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       showError(`Logout failed: ${error.message}`);
     } else {
       showInfo("You've been logged out. See you soon!");
-      window.location.href = LOGIN_PATH;
+      window.location.href = LANDING_PATH;
     }
   });
 
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   window.addEventListener("message", (event) => {
     if (event.data.type === "logout") {
       showInfo("Session ended. Redirecting to login...");
-      window.location.href = LOGIN_PATH;
+      window.location.href = LANDING_PATH;
     }
   });
 });

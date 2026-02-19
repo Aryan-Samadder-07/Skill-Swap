@@ -8,15 +8,17 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
   </head>
   <body>
-    <!-- Header -->
-    <header class="dashboard-header">
-      <h1>Your Profile</h1>
-      <button
-        onclick="window.location.href = '../Home/public/feed.html'"
-        class="back-btn"
-      >
-        Home
-      </button>
+    <!-- Reuse global header styles -->
+    <header>
+      <div class="logo">Your Profile</div>
+      <nav>
+        <button
+          onclick="window.location.href = '../Home/public/feed.html'"
+          class="btn"
+        >
+          Home
+        </button>
+      </nav>
     </header>
 
     <main>
@@ -36,13 +38,12 @@
         <p><strong>Credits:</strong> <span id="userCredits"></span></p>
         <p><strong>Bio:</strong> <span id="userBio"></span></p>
         <p><strong>Phone:</strong> <span id="userPhone"></span></p>
-        <button id="editProfileBtn" type="button">Edit Profile</button>
+        <button id="editProfileBtn" type="button" class="btn">
+          Edit Profile
+        </button>
 
-        <!-- Profile modal toast container -->
-        <div
-          id="toastContainerProfile"
-          class="toast-container inside-modal"
-        ></div>
+        <!-- Toast container -->
+        <div id="toastContainerProfile" class="toast-container"></div>
       </section>
 
       <!-- Skills Section -->
@@ -53,7 +54,7 @@
     </main>
 
     <!-- Edit Profile Modal -->
-    <div id="profileModal" class="modal hidden" aria-hidden="true">
+    <div id="profileModal" class="modal" aria-hidden="true">
       <div class="modal-content">
         <span class="close" role="button" aria-label="Close">&times;</span>
         <h2>Edit Profile</h2>
@@ -83,13 +84,14 @@
           <label for="profilePhone">Phone:</label>
           <input type="text" id="profilePhone" />
 
-          <!-- ✅ Added ID to Save button for clarity -->
-          <button type="submit" id="saveProfileBtn">Save Changes</button>
+          <button type="submit" id="saveProfileBtn" class="btn">
+            Save Changes
+          </button>
         </form>
       </div>
     </div>
 
-    <!-- ✅ Ensure script loads after DOM -->
+    <!-- Script -->
     <script type="module" src="dashboard.js" defer></script>
   </body>
 </html>

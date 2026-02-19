@@ -12,7 +12,7 @@
     <header class="credits-header">
       <button
         onclick="window.location.href = '../Home/public/feed.html'"
-        class="back-btn"
+        class="btn"
       >
         Home
       </button>
@@ -33,10 +33,7 @@
         <h2>Transaction History</h2>
 
         <!-- Toast container -->
-        <div
-          id="toastContainerCredits"
-          class="toast-container above-table"
-        ></div>
+        <div id="toastContainerCredits" class="toast-container"></div>
 
         <!-- Summary Bar -->
         <div id="transactionsSummary" class="summary-bar">
@@ -46,9 +43,9 @@
 
         <!-- Filter Controls -->
         <div class="filter-controls">
-          <button id="filterAll">All</button>
-          <button id="filterViewer">Spent</button>
-          <button id="filterCreator">Earned</button>
+          <button id="filterAll" class="btn">All</button>
+          <button id="filterViewer" class="btn">Spent</button>
+          <button id="filterCreator" class="btn">Earned</button>
         </div>
 
         <!-- Transactions Table -->
@@ -68,19 +65,20 @@
 
         <!-- Pagination Controls -->
         <div class="pagination">
-          <button id="prevPage">Previous</button>
+          <button id="prevPage" class="btn">Previous</button>
           <span id="pageInfo">Page 1</span>
-          <button id="nextPage">Next</button>
+          <button id="nextPage" class="btn">Next</button>
         </div>
 
         <!-- Export Controls -->
         <div class="export-controls">
-          <button id="downloadCsvBtn">Download CSV</button>
-          <button id="downloadXlsxBtn">Download Excel</button>
+          <button id="downloadCsvBtn" class="btn">Download CSV</button>
+          <button id="downloadXlsxBtn" class="btn">Download Excel</button>
         </div>
       </section>
     </main>
 
+    <!-- Script -->
     <script type="module" src="cred.js"></script>
   </body>
 </html>

@@ -8,7 +8,7 @@
   </head>
   <body>
     <!-- Toast container -->
-    <div id="toastContainer"></div>
+    <div id="toastContainer" class="toast-container"></div>
 
     <div class="auth-container">
       <h2>Create Your Account</h2>
@@ -38,7 +38,7 @@
         </div>
 
         <!-- Step 1: Send OTP -->
-        <button type="button" id="sendOtpBtn">Send OTP</button>
+        <button type="button" id="sendOtpBtn" class="btn">Send OTP</button>
 
         <!-- Step 2: Enter OTP (hidden until Send OTP is clicked) -->
         <div id="otpSection" style="display: none; margin-top: 15px">
@@ -47,13 +47,17 @@
             <input type="text" name="otp" id="otp" required />
             <span class="error-message" id="otpError"></span>
           </div>
-          <button type="submit">Complete Signup</button>
+          <button type="submit" class="btn">Complete Signup</button>
         </div>
       </form>
 
-      <p>Already have an account? <a href="login.html">Log in</a></p>
+      <p>
+        Already have an account?
+        <a href="login.html">Log in</a>
+      </p>
     </div>
 
+    <!-- Script -->
     <script type="module" src="../src/js/signup.js"></script>
   </body>
 </html>
