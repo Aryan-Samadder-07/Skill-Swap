@@ -5,44 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Upload Video - SkillSwap</title>
     <link rel="stylesheet" href="../../utils/common.css" />
+    <style>
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1.5rem;
+        background-color: #fff;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group label {
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+        color: var(--text);
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 0.3125rem;
+        font-size: 1em;
+        box-sizing: border-box;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      /* Progress bar container */
+      .progress-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      progress {
+        width: 100%;
+        height: 1rem;
+      }
+
+      #progressText {
+        font-size: 0.9em;
+        color: var(--text);
+      }
+
+      /* Responsive tweaks */
+      @media (max-width: 600px) {
+        form {
+          margin: 1rem;
+          padding: 1rem;
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- Toast container -->
-    <div id="toastContainer"></div>
+    <div id="toastContainer" class="toast-container"></div>
 
-    <!-- Header -->
-    <header class="upload-header">
-      <button onclick="window.location.href = 'feed.html'" class="back-btn">
-        Home
-      </button>
-      <h1>Upload Video</h1>
+    <!-- Reuse global header styles -->
+    <header>
+      <div class="logo">Upload</div>
+      <nav>
+        <button onclick="window.location.href = 'feed.html'" class="btn">
+          Home
+        </button>
+      </nav>
     </header>
 
     <main>
       <form id="uploadForm">
-        <label for="videoTitle">Title:</label>
-        <input type="text" id="videoTitle" required />
+        <!-- Title -->
+        <div class="form-group">
+          <label for="videoTitle">Title</label>
+          <input type="text" id="videoTitle" required />
+        </div>
 
-        <label for="videoDescription">Description:</label>
-        <textarea id="videoDescription"></textarea>
+        <!-- Description -->
+        <div class="form-group">
+          <label for="videoDescription">Description</label>
+          <textarea id="videoDescription"></textarea>
+        </div>
 
-        <label for="videoFile">Video File:</label>
-        <input type="file" id="videoFile" accept="video/*" required />
+        <!-- File Upload -->
+        <div class="form-group">
+          <label for="videoFile">Video File</label>
+          <input type="file" id="videoFile" accept="video/*" required />
+        </div>
 
-        <label for="videoCredits">Cost (credits):</label>
-        <input type="number" id="videoCredits" min="1" value="1" required />
+        <!-- Credits -->
+        <div class="form-group">
+          <label for="videoCredits">Cost (credits)</label>
+          <input type="number" id="videoCredits" min="1" value="1" required />
+        </div>
 
         <!-- Progress Bar -->
         <div class="progress-container">
           <progress id="uploadProgress" value="0" max="100"></progress>
           <span id="progressText">0%</span>
-          <button type="button" id="cancelUploadBtn">Cancel Upload</button>
+          <button type="button" id="cancelUploadBtn" class="btn">
+            Cancel Upload
+          </button>
         </div>
 
-        <button type="submit">Upload</button>
+        <!-- Submit -->
+        <button type="submit" class="btn">Upload</button>
       </form>
     </main>
 
-    <script type="module" src="upload.js"></script>
+    <!-- Script -->
+    <script type="module" src="../src/js/upload.js"></script>
   </body>
 </html>

@@ -5,6 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Profile - SkillSwap</title>
     <link rel="stylesheet" href="../utils/common.css" />
+
+    <!--  <style>
+      main {
+        max-width: 1000px;
+        margin: 2rem auto; /* centers content */
+        padding: 1rem;
+        box-sizing: border-box;
+      }
+
+      section {
+        background-color: #fff;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+      }
+
+      section h2 {
+        margin-top: 0;
+        color: var(--primary);
+      }
+    </style>
+ -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
   </head>
   <body>
@@ -54,7 +77,12 @@
     </main>
 
     <!-- Edit Profile Modal -->
-    <div id="profileModal" class="modal" aria-hidden="true">
+    <div
+      id="profileModal"
+      class="modal"
+      aria-hidden="true"
+      style="display: none"
+    >
       <div class="modal-content">
         <span class="close" role="button" aria-label="Close">&times;</span>
         <h2>Edit Profile</h2>

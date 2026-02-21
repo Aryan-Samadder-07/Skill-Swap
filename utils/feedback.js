@@ -1,5 +1,9 @@
 // feedback.js
-export function showToast(message, type = "info", containerId = "toastContainer") {
+export function showToast(
+  message,
+  type = "info",
+  containerId = "toastContainer",
+) {
   const container = document.getElementById(containerId);
   if (!container) {
     console.warn(`Toast container "${containerId}" not found.`);
@@ -12,9 +16,10 @@ export function showToast(message, type = "info", containerId = "toastContainer"
 
   container.appendChild(toast);
 
-  // Auto-remove after 3s
+  // Auto-remove after 3s with fade-out
   setTimeout(() => {
-    toast.remove();
+    toast.style.animation = "fadeOutToast 0.3s forwards";
+    setTimeout(() => toast.remove(), 300); // remove after fade-out completes
   }, 3000);
 }
 

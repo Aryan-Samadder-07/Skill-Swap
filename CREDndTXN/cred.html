@@ -8,20 +8,22 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
   </head>
   <body>
-    <!-- Header -->
-    <header class="credits-header">
-      <button
-        onclick="window.location.href = '../Home/public/feed.html'"
-        class="btn"
-      >
-        Home
-      </button>
-      <h1>Credits</h1>
+    <!-- Reuse global header styles -->
+    <header>
+      <div class="logo">Your Transactions</div>
+      <nav>
+        <button
+          onclick="window.location.href = '../Home/public/feed.html'"
+          class="btn"
+        >
+          Home
+        </button>
+      </nav>
     </header>
 
     <main>
       <!-- Balance Section -->
-      <section class="balance">
+      <section>
         <h2>Your Balance</h2>
         <p>
           <strong>Credits:</strong> <span id="userCredits">Loading...</span>
@@ -29,20 +31,20 @@
       </section>
 
       <!-- Transactions Section -->
-      <section class="transactions">
+      <section>
         <h2>Transaction History</h2>
 
         <!-- Toast container -->
-        <div id="toastContainerCredits" class="toast-container"></div>
+        <div id="toastContainer" class="toast-container"></div>
 
         <!-- Summary Bar -->
-        <div id="transactionsSummary" class="summary-bar">
+        <div id="transactionsSummary">
           <span id="totalSpent">Total Spent: 0</span> |
           <span id="totalEarned">Total Earned: 0</span>
         </div>
 
         <!-- Filter Controls -->
-        <div class="filter-controls">
+        <div>
           <button id="filterAll" class="btn">All</button>
           <button id="filterViewer" class="btn">Spent</button>
           <button id="filterCreator" class="btn">Earned</button>
@@ -64,14 +66,15 @@
         </table>
 
         <!-- Pagination Controls -->
-        <div class="pagination">
+        <div>
           <button id="prevPage" class="btn">Previous</button>
           <span id="pageInfo">Page 1</span>
           <button id="nextPage" class="btn">Next</button>
         </div>
 
         <!-- Export Controls -->
-        <div class="export-controls">
+        <div>
+          <br />
           <button id="downloadCsvBtn" class="btn">Download CSV</button>
           <button id="downloadXlsxBtn" class="btn">Download Excel</button>
         </div>
