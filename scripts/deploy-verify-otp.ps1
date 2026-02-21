@@ -1,1 +1,0 @@
-supabase functions deploy verify-otp --no-verify-jwt
