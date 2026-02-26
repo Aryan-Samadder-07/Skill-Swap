@@ -7,27 +7,32 @@
   </head>
   <body>
     <!-- Toast container -->
-    <div id="toastContainer"></div>
+    <div id="toastContainer" class="toast-container"></div>
 
+    <!-- Header -->
     <header>
       <h1>SkillSwap Player</h1>
       <nav>
-        <a href="feed.html">Home</a>
-        <button id="logoutBtn">Logout</button>
+        <a href="feed.html" class="btn">Home</a>
+        <button id="logoutBtn" class="btn">Logout</button>
       </nav>
     </header>
 
     <main>
+      <!-- Video Player -->
       <div id="videoContainer">
         <video
           id="videoPlayer"
           controls
-          poster="illustrations/default-thumbnail.png"
+          poster="../../Landing Page/public/illustrations/default-thumbnail.png"
         >
+          <!-- ✅ Source will be set dynamically by play.js -->
           <source id="videoSource" src="" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
+
+      <!-- Video Details -->
       <div id="videoDetails">
         <h2 id="videoTitle"></h2>
         <p id="videoDescription"></p>
@@ -36,6 +41,7 @@
       </div>
     </main>
 
-    <script type="module" src="../src/play.js"></script>
+    <!-- Script -->
+    <script type="module" src="../src/js/play.js"></script>
   </body>
 </html>

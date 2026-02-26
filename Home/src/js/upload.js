@@ -1,101 +1,149 @@
 import { supabase } from "../../../utils/api.js";
+import { safeAddListener } from "../../../utils/dom.js";
 import { showError, showSuccess, showInfo } from "../../../utils/feedback.js";
 
+const BASE_URL = "http://localhost:3000"; // Node.js MEGA service
+const EDGE_URL =
+  "https://ikixyxjmsmgdnmbtwnah.supabase.co/functions/v1/mega-ingest"; // Supabase Edge Function
+
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("uploadForm");
-  const cancelBtn = document.getElementById("cancelUploadBtn");
-  const progressBar = document.getElementById("uploadProgress");
-  const progressText = document.getElementById("progressText");
-
-  form.addEventListener("submit", async (e) => {
+  safeAddListener("#uploadForm", "submit", async function (e) {
     e.preventDefault();
-    console.log("Upload form submitted");
 
-    const title = document.getElementById("videoTitle").value;
-    const description = document.getElementById("videoDescription").value;
-    const credits = parseInt(document.getElementById("videoCredits").value, 10);
-    const file = document.getElementById("videoFile").files[0];
+    const title = this.querySelector("#videoTitle").value.trim();
+    const description = this.querySelector("#videoDescription").value.trim();
+    const credits = parseInt(this.querySelector("#videoCredits").value, 10);
+    const file = this.querySelector("#videoFile").files[0];
+
+    const progressBar = document.getElementById("uploadProgress");
+    const progressText = document.getElementById("progressText");
+    const resultBox = document.getElementById("uploadResult");
 
     if (!file) {
-      showError("Please select a video file.");
-      console.log("No file selected");
+      showError("Please select a video file.", "toastContainer");
       return;
     }
-    console.log("File selected:", file.name);
-
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser();
-    if (userError || !user) {
-      showError("You must be logged in to upload.");
-      console.log("User not logged in");
-      return;
-    }
-    console.log("User:", user.id);
 
     try {
-      const filePath = `${user.id}/${Date.now()}-${encodeURIComponent(file.name)}`;
-      console.log("Uploading to path:", filePath);
+      progressText.textContent = "Preparing upload...";
+      progressBar.value = 20;
 
-      const { data, error } = await supabase.storage
-        .from("videos")
-        .upload(filePath, file);
+      // Step 1: Generate a unique videoId
+      const videoId = crypto.randomUUID();
 
-      if (error) {
-        showError(`Upload failed: ${error.message}`);
-        console.error("Upload error:", error);
-        return;
-      }
-
-      progressBar.value = 100;
-      progressText.textContent = "100%";
-
-      const { data: publicUrlData } = supabase.storage
-        .from("videos")
-        .getPublicUrl(filePath);
-
-      const video_url = publicUrlData.publicUrl;
-      console.log("Public URL:", video_url);
-
-      const { data: video, error: insertError } = await supabase
-        .from("videos")
-        .insert({
-          creator_id: user.id,
+      // Step 2: Call Edge Function to insert metadata (no JWT required)
+      const edgeResp = await fetch(EDGE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          videoId,
           title,
           description,
-          video_url,
+          creator_id: user.id || "anonymous", // or session.user.id if you want to track users
           cost_credits: credits,
-        })
-        .select()
-        .single();
-
-      if (insertError) {
-        showError(`Failed to save video: ${insertError.message}`);
-        console.error("Insert error:", insertError);
-        return;
-      }
-
-      await supabase.from("transactions").insert({
-        video_id: video.id,
-        viewer_id: user.id,
-        creator_id: user.id,
-        credits_spent: 0,
+        }),
       });
 
-      showSuccess("Video uploaded successfully!");
-      console.log("Upload complete, redirecting...");
-      window.location.href = "../../public/feed.html";
+      const edgeData = await edgeResp.json();
+      if (!edgeData.success) {
+        throw new Error(edgeData.error || "Metadata insert failed");
+      }
+
+      progressBar.value = 40;
+      progressText.textContent = "Generating thumbnail...";
+
+      // Step 3: Capture thumbnail frame
+      const thumbnailBlob = await new Promise((resolve, reject) => {
+        const videoEl = document.createElement("video");
+        videoEl.src = URL.createObjectURL(file);
+        videoEl.currentTime = 2;
+        videoEl.muted = true;
+        videoEl.playsInline = true;
+
+        videoEl.onloadeddata = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = videoEl.videoWidth;
+          canvas.height = videoEl.videoHeight;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height);
+          canvas.toBlob((blob) => {
+            if (blob) resolve(blob);
+            else reject(new Error("Failed to generate thumbnail"));
+          }, "image/jpeg");
+        };
+
+        videoEl.onerror = reject;
+      });
+
+      progressBar.value = 60;
+      progressText.textContent = "Uploading to Node service...";
+
+      // Step 4: Send video + thumbnail to Node backend
+      const formData = new FormData();
+      formData.append("file", file, file.name);
+      formData.append("videoId", videoId);
+      formData.append("thumbnail", thumbnailBlob, `thumb-${Date.now()}.jpg`);
+
+      const response = await fetch(`${BASE_URL}/upload`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result?.error || `Upload error: ${response.status}`);
+      }
+
+      progressBar.value = 80;
+      progressText.textContent = "Finalizing upload...";
+
+      // Step 5: Poll Supabase for status
+      pollVideoStatus(videoId, progressBar, progressText, resultBox);
     } catch (err) {
-      showError(`Unexpected error: ${err.message}`);
-      console.error("Unexpected error:", err);
+      showError(`Error: ${err.message}`, "toastContainer");
+      console.error("Upload error:", err);
     }
   });
 
-  cancelBtn.addEventListener("click", () => {
+  safeAddListener("#cancelUploadBtn", "click", () => {
+    const progressBar = document.getElementById("uploadProgress");
+    const progressText = document.getElementById("progressText");
     progressBar.value = 0;
     progressText.textContent = "Cancelled";
-    showInfo("Upload cancelled.");
-    console.log("Upload cancelled");
+    showInfo("Upload cancelled.", "toastContainer");
   });
 });
+
+async function pollVideoStatus(videoId, progressBar, progressText, resultBox) {
+  const interval = setInterval(async () => {
+    const { data, error } = await supabase
+      .from("videos")
+      .select("status, video_url, thumbnail_url")
+      .eq("id", videoId)
+      .single();
+
+    if (error) {
+      console.error("Polling error:", error);
+      clearInterval(interval);
+      return;
+    }
+
+    if (data.status === "ready") {
+      clearInterval(interval);
+      progressBar.value = 100;
+      progressText.textContent = "Upload complete";
+      showSuccess("Video uploaded to MEGA successfully!", "toastContainer");
+
+      if (resultBox) {
+        resultBox.innerHTML = `
+          <p><strong>Upload finished!</strong></p>
+          <p>Video ID: ${videoId}</p>
+          <p>MEGA URL: ${data.video_url}</p>
+          <p>Thumbnail: ${data.thumbnail_url}</p>
+        `;
+      }
+    } else {
+      progressText.textContent = `Status: ${data.status}...`;
+    }
+  }, 5000);
+}

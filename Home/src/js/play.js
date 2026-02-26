@@ -1,6 +1,6 @@
 import { supabase, logout } from "../../../utils/api.js";
 import { safeAddListener } from "../../../utils/dom.js";
-import { showError, showSuccess, showInfo } from "../../../utils/feedback.js"; // adjust path
+import { showError, showSuccess, showInfo } from "../../../utils/feedback.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const {
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  loadVideo(videoId);
+  await loadVideo(user, videoId);
 
   // ✅ Logout button
   safeAddListener("#logoutBtn", "click", async () => {
@@ -34,13 +34,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 });
 
-async function loadVideo(videoId) {
+async function loadVideo(user, videoId) {
   const { data: video, error } = await supabase
     .from("videos")
     .select(
-      "title, description, video_url, cost_credits, creator_id, profiles(username)",
+      "id, title, description, mega_file_url, cost_credits, creator_id, profiles(username)",
     )
     .eq("id", videoId)
+    .eq("status", "ready") // ✅ only allow ready videos
     .single();
 
   if (error || !video) {
@@ -50,17 +51,43 @@ async function loadVideo(videoId) {
     return;
   }
 
-  const sourceEl = document.getElementById("videoSource");
+  // Deduct credits from viewer
+  const { error: deductError } = await supabase.rpc("deduct_credits", {
+    user_id: user.id,
+    amount: video.cost_credits,
+  });
+  if (deductError) {
+    showError("Not enough credits to watch this video.");
+    window.location.href = "feed.html";
+    return;
+  }
+
+  // Add credits to creator
+  await supabase.rpc("add_credits", {
+    user_id: video.creator_id,
+    amount: video.cost_credits,
+  });
+
+  // Record transaction
+  await supabase.from("transactions").insert({
+    video_id: video.id,
+    viewer_id: user.id,
+    creator_id: video.creator_id,
+    credits_spent: video.cost_credits,
+  });
+
+  // Populate UI
   const playerEl = document.getElementById("videoPlayer");
   const titleEl = document.getElementById("videoTitle");
   const descEl = document.getElementById("videoDescription");
   const creatorEl = document.getElementById("videoCreator");
   const costEl = document.getElementById("videoCost");
 
-  if (sourceEl && playerEl) {
-    sourceEl.src = video.video_url;
+  if (playerEl) {
+    // ✅ Direct playback from MEGA link
+    playerEl.src = video.mega_file_url;
     playerEl.load();
-    showInfo("Video loaded successfully.");
+    showSuccess("Credits deducted. Video ready to play!", "toastContainer");
   }
   if (titleEl) titleEl.textContent = video.title;
   if (descEl) descEl.textContent = video.description || "";

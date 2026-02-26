@@ -61,6 +61,36 @@
         color: var(--text);
       }
 
+      /* Retry button styling */
+      .retry-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 0.6rem 1rem;
+        border-radius: 0.4rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition:
+          background 0.3s ease,
+          opacity 0.3s ease;
+        z-index: 9999;
+        opacity: 0;
+        animation: fadeIn 0.4s ease forwards;
+      }
+
+      .retry-btn:hover {
+        background: var(--primary-dark);
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+
       /* Responsive tweaks */
       @media (max-width: 600px) {
         form {
@@ -104,6 +134,12 @@
           <input type="file" id="videoFile" accept="video/*" required />
         </div>
 
+        <!-- Thumbnail Upload -->
+        <div class="form-group">
+          <label for="thumbnailFile">Thumbnail (optional)</label>
+          <input type="file" id="thumbnailFile" accept="image/*" />
+        </div>
+
         <!-- Credits -->
         <div class="form-group">
           <label for="videoCredits">Cost (credits)</label>
@@ -122,6 +158,9 @@
         <!-- Submit -->
         <button type="submit" class="btn">Upload</button>
       </form>
+
+      <!-- Result Box -->
+      <div id="uploadResult" style="margin-top: 1rem"></div>
     </main>
 
     <!-- Script -->
